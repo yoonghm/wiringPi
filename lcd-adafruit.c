@@ -263,6 +263,7 @@ int main (int argc, char *argv[]) {
 
 gpio load i2c
 gpio i2cd
+# MCP23017 should be add default address 0x20
 
 # Test Red, green and blue LEDs
 gpio -x mcp23017:100:0x20 mode 106 out # Red
