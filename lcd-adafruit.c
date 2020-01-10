@@ -8,27 +8,27 @@
 #include <mcp23017.h>
 #include <lcd.h>
 
-#define	AF_BASE		100
-#define	AF_RED		(AF_BASE + 6)
-#define	AF_GREEN	(AF_BASE + 7)
-#define	AF_BLUE		(AF_BASE + 8)
+#define	AF_BASE   100
+#define	AF_RED    (AF_BASE + 6)
+#define	AF_GREEN  (AF_BASE + 7)
+#define	AF_BLUE   (AF_BASE + 8)
 
-#define	AF_E		  (AF_BASE + 13)
-#define	AF_RW		  (AF_BASE + 14)
-#define	AF_RS		  (AF_BASE + 15)
+#define	AF_E      (AF_BASE + 13)
+#define	AF_RW     (AF_BASE + 14)
+#define	AF_RS     (AF_BASE + 15)
 
-#define	AF_DB4		(AF_BASE + 12)
-#define	AF_DB5		(AF_BASE + 11)
-#define	AF_DB6		(AF_BASE + 10)
-#define	AF_DB7		(AF_BASE +  9)
+#define	AF_DB4    (AF_BASE + 12)
+#define	AF_DB5    (AF_BASE + 11)
+#define	AF_DB6    (AF_BASE + 10)
+#define	AF_DB7    (AF_BASE +  9)
 
-#define	AF_SELECT	(AF_BASE +  0)
-#define	AF_RIGHT	(AF_BASE +  1)
-#define	AF_DOWN		(AF_BASE +  2)
-#define	AF_UP		  (AF_BASE +  3)
-#define	AF_LEFT		(AF_BASE +  4)
+#define	AF_SELECT (AF_BASE +  0)
+#define	AF_RIGHT  (AF_BASE +  1)
+#define	AF_DOWN   (AF_BASE +  2)
+#define	AF_UP     (AF_BASE +  3)
+#define	AF_LEFT   (AF_BASE +  4)
 
-static unsigned char newChar [8] = {
+static unsigned char newChar[8] = {
   0b00100,
   0b00100,
   0b00000,
@@ -181,7 +181,7 @@ int main (int argc, char *argv[]) {
 
   colour = atoi(argv [1]);
 
-  wiringPiSetupSys();
+  wiringPiSetupSys(); /* Use /sys/class/gpio interface */
   mcp23017Setup(AF_BASE, 0x20);
 
   adafruitLCDSetup(colour);
@@ -260,6 +260,7 @@ int main (int argc, char *argv[]) {
 
 /*
 # See http://wiringpi.com/examples/adafruit-rgb-lcd-plate-and-wiringpi/
+# See http://ozzmaker.com/interface-16x2-lcd-with-the-raspberry-pi/
 
 gpio load i2c
 gpio i2cd
@@ -273,4 +274,5 @@ gpio -x mcp23017:100:0x20 write 107 0
 gpio -x mcp23017:100:0x20 mode 108 out # Blue
 gpio -x mcp23017:100:0x20 write 108
 
+gcc -o lcd-adafruit lcd-adafruit.c -lwiringPi
 */
